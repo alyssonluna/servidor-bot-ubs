@@ -6,10 +6,14 @@ app.use(express.json());
 
 // --- CONFIGURAÇÕES IMPORTANTES (COLE AS SUAS INFORMAÇÕES AQUI) ---
 const SHEET_ID = '19yxXlRTG39X547-0FUXZ6wThN-ii4akYPpfHH31uoxg'; // SEU SHEET ID
-const CREDENTIALS_FILE = 'agilizabot--xwhx-28bf62f9e1ae.json'; // NOME DO SEU ARQUIVO JSON
-// --- FIM DAS CONFIGURAÇÕES ---
 
-const creds = require(`./${CREDENTIALS_FILE}`);
+
+// O código agora vai ler as credenciais diretamente das variáveis de ambiente do Render
+const creds = {
+  client_email: process.env.GOOGLE_CLIENT_EMAIL,
+  private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+};
+
 const doc = new GoogleSpreadsheet(SHEET_ID);
 
 app.post('/webhook', async (req, res) => {
