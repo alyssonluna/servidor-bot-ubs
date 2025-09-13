@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "agilizabot--xwhx",
+  "private_key_id": "28bf62f9e1ae9d2c1d9f1fc39b9e5839cc2b2ca4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDFMWa5bOK+mzHa\nI7nWPbn9tXqybrez2SbNkMgwuSLaTojHu6gz3tS5AIMu/bUgFmkthQVQo8NClieY\nRjNWtHRV0YeEaFkmn6nlXoSxQvVPwq35CFcQCxHBKRRnVH967ku0HtXeZMTZhe8J\n3ppamMKe3/Vx5+723cEWoeVbtZtKhX/HlE7CjMxyv7GNt+kDYNUQ62qstLjGXFrT\nXO3Z6DtURah5NVB6ImDeJDHHuLKW2If66hfeP6YDvmUiJjuQ9PdiPb1RKzvS8gbC\nUUGWjAXgpziA5miOxM1q7unGuL6lyPS78qFh/gK0memE1sfnIy1n6lSp1V5OFnTd\n75OvSo0FAgMBAAECggEAGO58DGml6W95yBjIQDwhreAqGTFCbKzB6S+q/+4IaA2R\n4Z7qT1SXFKTp8SEGq33p4mV1HJL39w1BCFGn4AiExOzu82C2FNoPAv8GS9spZOI6\nWMgjKdYcco2dFMtsKsDCNY3IgIvBD7eNV3Qbk+TIhonOYI5weinjZdcmRogZkDxD\n622KNznjJGlqPmRbqNU1b7DGYw1hBF5haDEVPefSCTjmlPFY+fZ8iyDtiT90H+ZF\nfMgmPWntUSbZ1fGoCV7VERJFr134TTdGOFxgCHcFSvEO3NwkDb49/2lg0t5VKz3Z\n4cLuXY7qSh2qmHe7WVqVErWntz7fKUN1fkte02PgaQKBgQDnAkFwTSpgtpCbIV4I\nk2o17MgLh+TU5Uwa39PpxPhLfinFrNXDUxvx7HJoeJp9dYKOkeYxaFQo6x1aASHv\nNJAQM1leC9z7FSMXsHNfac4TlIDT0CneSHtLe7BX4/hpyB19VFJ/W+a9hpmLOdb7\nQ30ix1dleKZIO9oDgD6YDi0l/wKBgQDahp9gkRBKDL39Z2OjWeCNz9lIKbNnAeSh\n31B+pQBAYSvlVitXKx6zmxRyLaiTsL2OC/gg3djd83zNrybXDMfRIHQTF/Y2A9Si\n1Lywh9niK9KMjE+DO+WpTlwpFKSGQAJu846UkbLtKFFqhf/d6D0bdM2vNex2hdPu\nUKBzO7G0+wKBgQCwByz8OSDIr3UDcOqpmEM/sh1BhBzgCZXziIl/QeN+CzYjdi8x\ndpv9vhHz/6qhXTDOGOkSzxAKWhZ0phZIo4H/hlFb86hA/3tNKtzPYN1yWB/Ox3mP\n8yVYgHkAkCuT17R48w8mE06BLxbDW6CwuF2badDz9nqm4kyfjFKmJW9L2wKBgFhZ\nFRZ1j6Bghm9s3Vutepva7H3AXkfG/Ch1oJWTIAbnQlf1/o+/Xyo+CIYg74bGbdx/\n+lFPX95cEpkVtx46jI6AEG2nwmMUKWOrnp3ATtah4P3xvDPSg4dvptL1BY9BUbqJ\nvZtTTIOVSVVH16pfulTfZEjyBCfm80fmUPhFqhMBAoGBAMjANX9ootwAi59uvRAZ\nUaThhslOWXksl5lJCs6BFcQWIKedY4meukeLcx9qWK5aYhTFjpdAGnCDu86a5o9u\ndq3PrIWyZC5G6qFTRHkxt38zZN0dzYP4kKoP09ld2LeBiLGeEdTkVMBINadul2VA\nLPKqvrN2CUpNiGfbWYfygZ6O\n-----END PRIVATE KEY-----\n",
+  "client_email": "editor-planilha-bot@agilizabot--xwhx.iam.gserviceaccount.com",
+  "client_id": "113919437851425403755",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/editor-planilha-bot%40agilizabot--xwhx.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
