@@ -6,13 +6,8 @@ app.use(express.json());
 
 // --- CONFIGURAÇÕES IMPORTANTES (COLE AS SUAS INFORMAÇÕES AQUI) ---
 const SHEET_ID = '19yxXlRTG39X547-0FUXZ6wThN-ii4akYPpfHH31uoxg'; // SEU SHEET ID
-
-
-// O código agora vai ler as credenciais diretamente das variáveis de ambiente do Render
-const creds = {
-  client_email: process.env.GOOGLE_CLIENT_EMAIL,
-  private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-};
+const GOOGLE_API_KEY = 'AIzaSyDMf0SdaoeVaHqh_Pzl-CFibJsS_qH5SrU'; // A CHAVE DE API QUE VOCÊ ACABOU DE CRIAR
+// --- FIM DAS CONFIGURAÇÕES ---
 
 const doc = new GoogleSpreadsheet(SHEET_ID);
 
@@ -22,12 +17,12 @@ app.post('/webhook', async (req, res) => {
 
   if (intentName === 'Pre_Agendamento') {
     try {
-      await doc.useServiceAccountAuth(creds);
+      doc.useApiKey(GOOGLE_API_KEY); // <<-- MUDANÇA IMPORTANTE AQUI
       await doc.loadInfo();
       const sheet = doc.sheetsByIndex[0];
 
       const params = req.body.queryResult.parameters;
-      const telegramId = req.body.originalDetectIntentRequest.payload.data.from.id;
+      const telegramId = req.body.originalDetectIntentRequest.payload.data.from.id || 'console_test';
 
       const newRow = {
         id_telegram: telegramId,
@@ -41,7 +36,7 @@ app.post('/webhook', async (req, res) => {
         notificacao_enviada: 'NÃO'
       };
       
-      await sheet.addRow(newRow);
+      await sheet.addRow(newRow); // <<-- MUDANÇA IMPORTANTE AQUI
       responseText = 'Obrigado! Seu pré-agendamento foi recebido e enviado para a recepção. Você receberá uma mensagem de confirmação final em breve.';
 
     } catch (error) {
@@ -50,7 +45,6 @@ app.post('/webhook', async (req, res) => {
     }
   }
   
-  // Monta a resposta para o Dialogflow
   const response = {
     fulfillmentText: responseText
   };
