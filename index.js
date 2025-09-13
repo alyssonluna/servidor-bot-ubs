@@ -1,28 +1,30 @@
 'use strict';
 const express = require('express');
+const { WebhookClient } = require('dialogflow-fulfillment'); // << VOLTAMOS A USAR
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+
 const app = express();
 app.use(express.json());
 
-// --- CONFIGURAÇÕES IMPORTANTES (COLE AS SUAS INFORMAÇÕES AQUI) ---
+// --- CONFIGURAÇÕES IMPORTANTES (COLOQUE AS SUAS INFORMAÇÕES AQUI) ---
 const SHEET_ID = '19yxXlRTG39X547-0FUXZ6wThN-ii4akYPpfHH31uoxg'; // SEU SHEET ID
-const GOOGLE_API_KEY = 'AIzaSyDMf0SdaoeVaHqh_Pzl-CFibJsS_qH5SrU'; // A CHAVE DE API QUE VOCÊ ACABOU DE CRIAR
+const CREDENTIALS_FILE = 'agilizabot--xwhx-f3377582eda4.json'; // NOME DO SEU ARQUIVO JSON
 // --- FIM DAS CONFIGURAÇÕES ---
 
+const creds = require(`./${CREDENTIALS_FILE}`);
 const doc = new GoogleSpreadsheet(SHEET_ID);
 
-app.post('/webhook', async (req, res) => {
-  const intentName = req.body.queryResult.intent.displayName;
-  let responseText = 'Desculpe, não entendi.';
+app.post('/webhook', (req, res) => {
+  const agent = new WebhookClient({ request: req, response: res });
 
-  if (intentName === 'Pre_Agendamento') {
+  async function preAgendamentoHandler(agent) {
     try {
-      doc.useApiKey(GOOGLE_API_KEY); // <<-- MUDANÇA IMPORTANTE AQUI
+      await doc.useServiceAccountAuth(creds); // << VOLTAMOS A USAR
       await doc.loadInfo();
       const sheet = doc.sheetsByIndex[0];
 
-      const params = req.body.queryResult.parameters;
-      const telegramId = req.body.originalDetectIntentRequest.payload.data.from.id || 'console_test';
+      const params = agent.parameters;
+      const telegramId = agent.originalRequest.payload.data.from.id;
 
       const newRow = {
         id_telegram: telegramId,
@@ -35,21 +37,20 @@ app.post('/webhook', async (req, res) => {
         status_agendamento: 'Pendente',
         notificacao_enviada: 'NÃO'
       };
-      
-      await sheet.addRow(newRow); // <<-- MUDANÇA IMPORTANTE AQUI
-      responseText = 'Obrigado! Seu pré-agendamento foi recebido e enviado para a recepção. Você receberá uma mensagem de confirmação final em breve.';
+
+      await sheet.addRow(newRow);
+
+      agent.add('Obrigado! Seu pré-agendamento foi recebido e enviado para a recepção. Você receberá uma mensagem de confirmação final em breve.');
 
     } catch (error) {
       console.error('Erro ao salvar na planilha:', error);
-      responseText = 'Desculpe, tivemos um problema ao registrar seu pedido. Por favor, tente novamente mais tarde.';
+      agent.add('Desculpe, tivemos um problema ao registrar seu pedido. Por favor, tente novamente mais tarde.');
     }
   }
-  
-  const response = {
-    fulfillmentText: responseText
-  };
-  
-  res.json(response);
+
+  let intentMap = new Map();
+  intentMap.set('Pre_Agendamento', preAgendamentoHandler);
+  agent.handleRequest(intentMap);
 });
 
 const PORT = process.env.PORT || 3000;
